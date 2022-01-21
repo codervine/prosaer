@@ -15,16 +15,16 @@ class CreateOrganisationsTable extends Migration
     {
         Schema::create('organisations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->foreignId('organisation_type_id')->constrained();
             $table->string('address_line_1');
-            $table->string('address_line_2');
+            $table->string('address_line_2')->nullable();
+            $table->foreignId('country_id')->constrained();
             $table->string('website')->unique();
             $table->string('email')->unique();
-            $table->string('mobile');
-            $table->foreignId('state_id')->constrained();
+            $table->string('mobile')->nullable();
             $table->timestamps();
         });
     }

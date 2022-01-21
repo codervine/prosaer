@@ -16,7 +16,7 @@ class CreateOrganisationTypesTable extends Migration
         Schema::create('organisation_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('comment');
+            $table->text('comment');
             $table->timestamps();
         });
     }
