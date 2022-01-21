@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\v1\AuthenticationController;
+use App\Http\Controllers\api\v1\UserController;
+use App\Http\Resources\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +21,15 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/greeting', function () {
-    return 'Hello World';
-});
+//authentication
+Route::prefix('/user')->group( function(){
+
+    Route::post('/login', [AuthenticationController::class, 'login']);
+
+    Route::middleware('auth:api')->group(function () {
+        Route::get('/all-users', [UserController::class, 'index']);
+    
+    });
+} );
+
+;
